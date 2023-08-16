@@ -25,3 +25,6 @@ class MusicList(BaseModel):
 
 class MusicDelete(BaseModel):
     id: str
+    
+class MusicNameList(BaseModel):
+    musics: list[str]

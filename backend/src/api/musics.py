@@ -1,6 +1,7 @@
 from fastapi import APIRouter, status, HTTPException
-from src.schemas.music import MusicGet, MusicModel, MusicDelete
+from src.schemas.music import MusicGet, MusicModel, MusicDelete, MusicList, MusicNameList
 from starlette.responses import JSONResponse
+from src.db import database as db
 
 from src.service.impl.music_service import MusicService
 from src.schemas.music import SongCreateModel
@@ -52,6 +53,27 @@ def add_song(song: SongCreateModel):
 def delete_song(song_id: str):
     song_delete_response = MusicService.delete_song(song_id)
     return song_delete_response
+
+@router.get(
+    "/top-rated",
+    response_model=MusicNameList,  # Assuming Song model has a field for average rating
+    description="Retrieve top-rated songs"
+)
+def get_top_rated_songs(limit: int = 5):
+    """
+    Get the top-rated songs based on average rating.
+
+    Args:
+    - limit (int): How many top-rated songs to retrieve. Default is 10.
+
+    Returns:
+    - A list of top-rated songs.
+    """
+    print('teste')
+    songs = db.get_top_rated_songs('musicas', limit)
+    print('TESTE2 ')
+    print(songs)
+    return {'musics':songs}
 
 
 # Edit a song's genre
