@@ -2,26 +2,33 @@ from typing import Optional
 from datetime import datetime
 from pydantic import BaseModel
 
-class AlbumModel(BaseModel):
+
+class SongModel(BaseModel):
     id: str
     title: str
+    genre: str
     artist: str
     release_year: int
+    popularity: int
 
-class AlbumGet(BaseModel):
+class SongGet(BaseModel):
     id: str
     title: str
+    genre: str
     artist: str
     release_year: int
+    popularity: int
 
-class AlbumCreateModel(BaseModel):
+class SongCreateModel(BaseModel):
     id: str
     title: str
+    genre: str
     artist: str
     release_year: int
+    popularity: int
 
-class AlbumList(BaseModel):
-    albums: list[AlbumGet]
+class SongList(BaseModel):
+    songs: list[SongGet]
 
-class AlbumDelete(BaseModel):
+class SongDelete(BaseModel):
     id: str
