@@ -4,10 +4,7 @@ from pydantic import BaseModel
 
 
 class SongModel(BaseModel):
-<<<<<<< HEAD
-=======
     id: str
->>>>>>> main
     title: str
     genre: str
     artist: str
@@ -15,12 +12,8 @@ class SongModel(BaseModel):
     popularity: int
 
 class SongGet(BaseModel):
-<<<<<<< HEAD
-    name: str
-=======
     id: str
     title: str
->>>>>>> main
     genre: str
     artist: str
     release_year: int
@@ -35,7 +28,6 @@ class SongCreateModel(BaseModel):
     popularity: int
 
 class SongList(BaseModel):
-<<<<<<< HEAD
     songs: list[SongGet]      # Mudando de musics para songs
 
 class SongDelete(BaseModel):
@@ -43,9 +35,7 @@ class SongDelete(BaseModel):
     
 class SongNameList(BaseModel):
     songs: list[str]            # Mudando de musics para songs
-=======
     songs: list[SongGet]
 
 class SongDelete(BaseModel):
     id: str
->>>>>>> main

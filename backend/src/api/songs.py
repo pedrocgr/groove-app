@@ -1,27 +1,14 @@
-<<<<<<< HEAD
-from fastapi import APIRouter, status, HTTPException
-from src.schemas.song import SongGet, SongModel, SongDelete, SongList, SongNameList
-from starlette.responses import JSONResponse
-from src.db import database as db
-
-=======
 from datetime import datetime
 from fastapi import APIRouter, HTTPException, Path, status
 from pydantic import BaseModel
 from src.db import database as db
 from src.schemas.song import SongGet, SongModel, SongDelete,SongList
 from starlette.responses import JSONResponse
->>>>>>> main
 from src.service.impl.song_service import SongService
 from src.schemas.song import SongCreateModel
 
 router = APIRouter()
 
-<<<<<<< HEAD
-# Get a specific song
-@router.get(
-    "/song/{song_id}",
-=======
 # class Song(BaseModel):
 #     id: str
 #     title: str
@@ -32,7 +19,6 @@ router = APIRouter()
 # Get a specific song
 @router.get(
     "/{song_id}",
->>>>>>> main
     response_model=SongModel,
     response_class=JSONResponse,
     summary="Get a specific song",
@@ -41,11 +27,6 @@ def get_song(song_id: str):
     song_get_response = SongService.get_song(song_id)
 
     return song_get_response
-<<<<<<< HEAD
-
-@router.put(
-    "/song/{song_id}",
-=======
 from fastapi import APIRouter, HTTPException, Path
 from pydantic import BaseModel
 from src.db import database as db
@@ -79,7 +60,6 @@ def get_songs():
 
 @router.put(
     "/{song_id}",
->>>>>>> main
     response_model=SongModel,
     response_class=JSONResponse,
     summary="update a song",
@@ -92,11 +72,7 @@ def edit_song(song_id: str, song: SongCreateModel):
 
 # Add a song
 @router.post(
-<<<<<<< HEAD
-    "/song",
-=======
     "/create",
->>>>>>> main
     response_model=SongModel,
     response_class=JSONResponse,
     summary="create a song",
@@ -106,10 +82,6 @@ def add_song(song: SongCreateModel):
 
     return song_add_response
 
-<<<<<<< HEAD
-@router.delete(
-    "/song/{song_id}",
-=======
 @router.get(
     "/songs",
     response_model=SongList,
@@ -129,7 +101,6 @@ def get_songs():
 
 @router.delete(
     "/{song_id}",
->>>>>>> main
     response_model=SongDelete,
     response_class=JSONResponse,
     summary="delete a song",
@@ -139,28 +110,6 @@ def delete_song(song_id: str):
     return song_delete_response
 
 @router.get(
-<<<<<<< HEAD
-    "/get_top_rated_songs",
-    response_model=SongNameList,  # Assuming Song model has a field for average rating
-    description="Retrieve top-rated songs"
-)
-def get_top_rated_songs(limit: int = 5):
-    """
-    Get the top-rated songs based on average rating.
-
-    Args:
-    - limit (int): How many top-rated songs to retrieve. Default is 10.
-
-    Returns:
-    - A list of top-rated songs.
-    """
-    print('teste')
-    songs = db.get_top_rated_songs('songs', limit)
-    print('TESTE2 ')
-    print(songs)
-    return {'songs':songs}
-
-=======
     "/higlighted",
     response_model=SongList,
     response_class=JSONResponse,
@@ -171,7 +120,6 @@ def get_highlighted():
     return {
         "musics": highlighted_response
     }
->>>>>>> main
 
 # Edit a song's genre
 # @router.put(
@@ -185,10 +133,6 @@ def get_highlighted():
 #     },
 # )
 # def edit_genre(song_id: str, genre: str) -> HttpResponseModel:
-<<<<<<< HEAD
-#     edit_genre_response = SongService.edit_genre(song_id, genre)
-#     return edit_genre_response
-=======
 #     edit_genre_response = MusicService.edit_genre(song_id, genre)
 #     return edit_genre_response
 #    response_model=list[Song],
@@ -246,4 +190,3 @@ def get_song_by_id(song_id: int = Path(..., description="The ID of the song to r
     song['available_on'] = song_links
 
     return song
->>>>>>> main
