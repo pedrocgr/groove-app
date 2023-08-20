@@ -33,9 +33,5 @@ class SongList(BaseModel):
 class SongDelete(BaseModel):
     id: str
     
-class SongNameList(BaseModel):
-    songs: list[str]            # Mudando de musics para songs
-    songs: list[SongGet]
-
 class SongDelete(BaseModel):
     id: str

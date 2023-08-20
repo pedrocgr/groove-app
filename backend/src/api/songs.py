@@ -190,3 +190,19 @@ def get_song_by_id(song_id: int = Path(..., description="The ID of the song to r
     song['available_on'] = song_links
 
     return song
+
+@router.get(
+    "/songs/top-rated",
+    response_model=list[str],  # Assuming Song model has a field for average rating
+    description="Retrieve top-rated songs"
+)
+def get_top_rated_songs(limit: int = 5):
+    """
+    Get the top-rated songs based on average rating.
+    Args:
+    - limit (int): How many top-rated songs to retrieve. Default is 10.
+    Returns:
+    - A list of top-rated songs.
+    """
+    songs = db.get_top_rated_songs('songs', limit)
+    return songs
