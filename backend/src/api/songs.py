@@ -55,7 +55,7 @@ def delete_song(song_id: str):
     return song_delete_response
 
 @router.get(
-    "/songs/get_top_rated_songs",
+    "/get_top_rated_songs",
     response_model=SongNameList,  # Assuming Song model has a field for average rating
     description="Retrieve top-rated songs"
 )

@@ -1,5 +1,5 @@
 from src.schemas.response import HTTPResponses, HttpResponseModel
-from src.schemas.music import SongCreateModel
+from src.schemas.song import SongCreateModel
 from src.db.__init__ import database as db
 
 
