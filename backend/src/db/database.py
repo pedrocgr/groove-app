@@ -367,7 +367,7 @@ class Database():
 
         return song_links
     
-    
+
     def get_top_rated_songs(self, collection_name: str, limit: int = 5):
         """Fetch top-rated songs ordered by their average rating."""
         print("get_top_rated_songs")
@@ -375,21 +375,4 @@ class Database():
         all_reviews = list(collection.find({}, {"_id": 0}))
         print(all_reviews)
 
-        grouped_reviews = {}
-        for review in all_reviews:
-            if review['song'] not in grouped_reviews:
-                grouped_reviews[review['song']] = {'avg_rating': 0, 'count': 0}
-
-            grouped_reviews[review['song']]['avg_rating'] += review['rating']
-            grouped_reviews[review['song']]['count'] += 1
-
-        for song in grouped_reviews:
-            grouped_reviews[song]['avg_rating'] = grouped_reviews[song]['avg_rating'] / grouped_reviews[song]['count']
-
-        # top_rated_songs = sorted(grouped_reviews, key=lambda x: x['avg_rating'], reverse=True)[:limit]
-        top_rated_songs = sorted(grouped_reviews.items(), key=lambda x: x[1]['avg_rating'], reverse=True)[:limit]
-        top_song_names = [song[0] for song in top_rated_songs]
-        print(top_song_names)
-        print(top_rated_songs)
-
-        return top_song_names
+        return result

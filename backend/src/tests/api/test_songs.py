@@ -1,7 +1,10 @@
 from fastapi.testclient import TestClient
 from src.db import database as db
 from datetime import datetime, timezone
-from unittest.mock import patch
+from unittest.mock import patch, MagicMock
+from src.service.impl.song_service import SongService
+from src.service.impl.review_service import ReviewService
+from src.main import app
 
 def test_get_song(client: TestClient):
     with patch.object(db, "get_all_items") as mock_get_all_items:
@@ -70,7 +73,7 @@ def test_get_song_by_id(client: TestClient):
         "timestamp": "2023-08-15T12:00:00Z",
     }
     
-    
+"""     
 def test_get_top_rated_songs(client: TestClient):
     # Iremos supor que temos 5 músicas no banco de dados, cada uma com uma avaliação média.
     mock_top_rated_songs = ["Song1", "Song2", "Song3", "Song4", "Song5"]
@@ -88,4 +91,76 @@ def test_get_top_rated_songs(client: TestClient):
 
     # Verificamos se a resposta está correta.
     assert response.status_code == 200
-    assert response.json() == mock_top_rated_songs
+    assert response.json() == mock_top_rated_songs """
+    
+    
+""" def test_get_top_rated_songs_from_reviews(client: TestClient):
+    # Mock data: reviews for three songs with their ratings.
+    mock_reviews = [
+        {"song": "Song1", "rating": 4},
+        {"song": "Song1", "rating": 5},
+        {"song": "Song1", "rating": 4},
+        {"song": "Song2", "rating": 5},
+        {"song": "Song2", "rating": 5},
+        {"song": "Song2", "rating": 4},
+        {"song": "Song3", "rating": 1},
+        {"song": "Song3", "rating": 2}
+    ]
+
+    # Expected top-rated songs ordered by their average rating (based on the above reviews).
+    expected_top_rated_songs = ["Song2", "Song1", "Song3"]
+
+    with patch.object(db, "get_top_rated_songs") as mock_get_top_rated:
+        # The mock database will return the top-rated songs based on the reviews
+        mock_get_top_rated.return_value = expected_top_rated_songs
+
+        # We request the top-rated songs.
+        response = client.get("songs/songs/top-rated")
+
+        # Validate the response
+        assert response.status_code == 200
+        assert response.json() == expected_top_rated_songs """
+
+def test_get_top_rated_songs(client: TestClient):
+    # Mock data for reviews
+    mock_reviews = [
+        {
+            "title": "Review 1",
+            "description": "Description 1",
+            "rating": 5,
+            "author": "Author 1",
+            "song": "Song 1",
+        },
+        {
+            "title": "Review 2",
+            "description": "Description 2",
+            "rating": 4,
+            "author": "Author 2",
+            "song": "Song 1",
+        },
+        {
+            "title": "Review 3",
+            "description": "Description 3",
+            "rating": 3,
+            "author": "Author 3",
+            "song": "Song 2",
+        },
+    ]
+
+    # Mock expected top-rated songs based on the mock_reviews
+    expected_top_rated_songs = [
+        {"song": "Song 1", "average_rating": 4.5},
+        {"song": "Song 2", "average_rating": 3}
+    ]
+    client = TestClient(app)
+    ReviewService.get_reviews = MagicMock(return_value=mock_reviews)  # Patch the method used to fetch reviews
+    # Patch the method used to fetch reviews (assuming `get_all_items` fetches reviews)
+        
+    # Making a request to the API endpoint that fetches top rated songs
+    response = client.get("songs/songs_r/top-rated")
+
+    # Assert that the response status is 200 (OK) and the returned data matches the expected top rated songs
+    print(response.json())
+    print("-----------------------------------------")
+    assert response.status_code == 200
+    assert response.json() == {'songs': expected_top_rated_songs}
