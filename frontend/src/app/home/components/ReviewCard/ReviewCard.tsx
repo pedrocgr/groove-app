@@ -35,9 +35,11 @@ const SongCover = styled.img`
   border-radius: 8px;
 `;
 
-const SongTitle = styled.div`
+const SongTitle = styled.a`
+  color: black;
   font-weight: 700;
   margin-bottom: 5px;
+  text-decoration: none;
 `;
 
 const ArtistName = styled.div`
@@ -83,10 +85,11 @@ export const ReviewCard = (props: ReviewCardProps) => {
   return (
     <CardWrapper>
       <SongHeader>
-        <SongCover src={props.songCover} width={100} height={100} />
-
+        <a href="#">
+          <SongCover src={props.songCover} width={100} height={100} />
+        </a>
         <div>
-          <SongTitle>{props.songTitle}</SongTitle>
+          <SongTitle href="#">{props.songTitle}</SongTitle>
           <ArtistName>{props.artistName}</ArtistName>
           <div>{[...ratingStars(props.rating)]}</div>
         </div>

@@ -1,9 +1,5 @@
 import styled from "styled-components";
 
-export const PageWrapper = styled.div`
-  background: transparent;
-`;
-
 export const TopBar = styled.div`
   display: flex;
   align-items: center;
@@ -27,7 +23,7 @@ export const ButtonsDiv = styled.div`
 export const UserImage = styled.img`
   width: 40px;
   padding-right: 10px;
-`; 
+`;
 
 export const NavButtons = styled.div`
   padding-top: 20px;
@@ -35,8 +31,7 @@ export const NavButtons = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-around;
-  position: fixed;
+  position: sticky;
   top: 0;
-  left: 0;
 `;
 
