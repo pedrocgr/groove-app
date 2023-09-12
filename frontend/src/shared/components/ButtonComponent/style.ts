@@ -22,7 +22,7 @@ export const ButtonWrapper = styled.button<ButtonWrapperProps>`
   color: ${props => (props.primary ? 'white' : 'black')};
   font-size: 1em;
   padding: 0;
-  border-bottom:none;
+  border-bottom: 'none';
   cursor: pointer;
   
   transition: all 0.2s ease-in;
