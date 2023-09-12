@@ -1,10 +1,20 @@
 from fastapi import APIRouter, HTTPException
 from starlette.responses import JSONResponse
-from src.schemas.song import SongGet, SongModel, SongDelete, SongList, SongNameList, SongCreateModel, GetSongsTopRated, SongCreate
+from src.schemas.song import (
+    SongGet,
+    SongModel,
+    SongDelete,
+    SongList,
+    SongNameList,
+    SongCreateModel,
+    GetSongsTopRated,
+    SongCreate,
+)
 from src.service.impl.song_service import SongService
 from src.schemas.review import ReviewModel, ReviewList
 
 router = APIRouter()
+
 
 @router.get(
     "/{song_id}",
@@ -25,11 +35,13 @@ def get_song(song_id: str):
     "/",
     response_model=SongList,
     response_class=JSONResponse,
-    description="Retrieve all songs"
+    description="Retrieve all songs",
 )
 def get_songs():
     songs = SongService.get_songs()
-    return {'songs': songs, }
+    return {
+        "songs": songs,
+    }
 
 
 @router.put(
@@ -45,6 +57,7 @@ def edit_song(song_id: str, song: SongCreateModel):
         raise HTTPException(status_code=400, detail="Invalid data")
     else:
         return song_edit_response
+
 
 @router.post(
     "/create",
@@ -80,17 +93,16 @@ def delete_song(song_id: str):
     summary="get highlighted songs",
 )
 def get_highlighted():
-    songs = SongService.get_songs()['songs']
+    songs = SongService.get_songs()["songs"]
 
     for song in songs:
-        song['id'] = str(song['_id'])
-        del song['_id']
+        song["id"] = str(song["_id"])
+        del song["_id"]
 
-    songs = sorted(songs, key=lambda x: x['popularity'], reverse=True)
+    songs = sorted(songs, key=lambda x: x["popularity"], reverse=True)
 
-    return {
-        "songs": songs
-    }
+    return {"songs": songs}
+
 
 @router.get(
     "/songs_by_year/{year}",
@@ -142,7 +154,7 @@ def get_by_artist(artist):
 @router.get(
     "/songs_r/top-rated",
     response_model=GetSongsTopRated,
-    description="Retrieve top-rated songs"
+    description="Retrieve top-rated songs",
 )
 def get_top_rated_songs(limit: int = 5):
     """
@@ -154,10 +166,9 @@ def get_top_rated_songs(limit: int = 5):
     """
     songs = SongService.get_top_rated_songs(limit)
     print(songs)
-    response = {
-        "songs": songs
-    }
+    response = {"songs": songs}
     return response
+
 
 @router.get(
     "/{song_id}/reviews",
@@ -166,10 +177,9 @@ def get_top_rated_songs(limit: int = 5):
     summary="Get reviews of a specific song",
 )
 def get_reviews(song_id: str):
-
     reviews = SongService.get_reviews(song_id)
 
     if not reviews:
         raise HTTPException(status_code=404, detail="Reviews not found")
 
-    return { "reviews": reviews }
+    return {"reviews": reviews}

@@ -7,11 +7,11 @@ from typing import Dict
 from logging import INFO, WARNING, getLogger
 from bson.objectid import ObjectId
 from fastapi import HTTPException
-logger = getLogger('uvicorn')
+
+logger = getLogger("uvicorn")
 
 
-class Database():
-
+class Database:
     ID_LENGTH = 8
 
     def __init__(self):
@@ -28,12 +28,10 @@ class Database():
 
             print("--------------------")
             logger.info("MongoDB connected!")
-            logger.info(
-                f"Server Version: {mongo_connection.server_info()['version']}")
+            logger.info(f"Server Version: {mongo_connection.server_info()['version']}")
             print("--------------------")
 
         except errors.ServerSelectionTimeoutError as err:
-
             mongo_connection = None
             logger.setLevel(WARNING)
             logger.info(f"MongoDB connection error! {err}")
@@ -48,10 +46,7 @@ class Database():
         return self.db
 
     def create_collection(
-        self,
-        name: str,
-        indexes: List[IndexModel] = [],
-        validation_schema: Dict = {}
+        self, name: str, indexes: List[IndexModel] = [], validation_schema: Dict = {}
     ) -> Collection:
         """
         Create a collection
@@ -76,10 +71,7 @@ class Database():
 
         collection_options = {"validator": {"$jsonSchema": validation_schema}}
 
-        collection: Collection = self.db.create_collection(
-            name,
-            **collection_options
-        )
+        collection: Collection = self.db.create_collection(name, **collection_options)
 
         collection.create_indexes(indexes)
 
@@ -191,18 +183,14 @@ class Database():
         """
         # TODO: test if this method works
 
-        item["id"] = str(uuid4())[:self.ID_LENGTH]
+        item["id"] = str(uuid4())[: self.ID_LENGTH]
 
         collection: Collection = self.db[collection_name]
 
         item_id = collection.insert_one(item).inserted_id
-        return {
-            "id": str(item_id),
-            **item
-        }
+        return {"id": str(item_id), **item}
 
     def get_by_id(self, collection_name: str, item_id: str) -> dict:
-
         collection: Collection = self.db[collection_name]
 
         item_id = ObjectId(item_id)
@@ -213,6 +201,21 @@ class Database():
             return None
 
         return item
+
+    def find(self, collection_name: str, filter) -> dict:
+        collection: Collection = self.db[collection_name]
+
+        return collection.find(filter)
+
+    def find_by_id(self, collection_name: str, item_id: str) -> dict:
+        item_id = ObjectId(item_id)
+
+        return self.find_one(collection_name, {"_id": item_id})
+
+    def find_one(self, collection_name: str, filter) -> dict:
+        collection: Collection = self.db[collection_name]
+
+        return collection.find_one(filter)
 
     def add(self, collection_name: str, item: dict) -> dict:
         """
@@ -236,10 +239,7 @@ class Database():
 
         item_id = collection.insert_one(item).inserted_id
         item["_id"] = str(item["_id"])
-        return {
-            "id": str(item_id),
-            **item
-        }
+        return {"id": str(item_id), **item}
 
     def edit(self, collection_name: str, item_id: str, item: dict) -> dict:
         collection: Collection = self.db[collection_name]
@@ -250,9 +250,7 @@ class Database():
 
         else:
             item_id = collection.update_one({"_id": ObjectId(item_id)}, {"$set": item})
-            return {
-                **item
-            }
+            return {**item}
 
     def delete(self, collection_name: str, item_id: str) -> dict:
         collection: Collection = self.db[collection_name]
@@ -260,15 +258,9 @@ class Database():
         item = collection.delete_one({"_id": ObjectId(item_id)})
 
         if item.deleted_count == 0:
-            return {
-                "id": None
-            }
+            return {"id": None}
 
-        return {
-            'id': item_id
-        }
-
-
+        return {"id": item_id}
 
     def get_by_year(self, collection_name: str, year: int) -> list:
         """
@@ -289,9 +281,8 @@ class Database():
         collection: Collection = self.db[collection_name]
         year = int(year)
         items = list(collection.find({"release_year": year}))
-        return {
-            "songs": items
-        }
+        return {"songs": items}
+
     def get_available_on_for_song(self, song_id: str) -> Dict[str, str]:
         song_links = {
             "Spotify": f"https://spotify.com/song/{song_id}",
@@ -321,9 +312,7 @@ class Database():
         for itm in items:
             del itm["_id"]
 
-        return {
-            "songs": items
-        }
+        return {"songs": items}
 
     def get_by_title(self, collection_name: str, title: str) -> list:
         """
@@ -365,9 +354,7 @@ class Database():
         collection: Collection = self.db[collection_name]
         items = list(collection.find({"genre": genre}))
 
-        return {
-            "songs": items
-        }
+        return {"songs": items}
 
     def get_by_artist(self, collection_name: str, artist: str) -> list:
         """
@@ -391,10 +378,7 @@ class Database():
         for itm in items:
             del itm["_id"]
 
-        return {
-            "musics": items
-        }
-
+        return {"musics": items}
 
     def get_by_album(self, collection_name: str, album: str) -> list:
         """
@@ -415,25 +399,4 @@ class Database():
         collection: Collection = self.db[collection_name]
         items = list(collection.find({"title": album}))
 
-        return {
-            "musics": items
-        }
-
-    def get_reviews_by_song(self, song_id: str) -> list:
-            """
-            Retrieve reviews for a specific song by song.
-
-            Parameters:
-            - song: str
-                The ID of the song for which to retrieve reviews.
-
-            Returns:
-            - List[dict]:
-
-                A list of dictionaries representing reviews for the specified song.
-            """
-            collection_name = "reviews"
-            collection: Collection = self.db[collection_name]
-            reviews = list(collection.find({"song": song_id}))
-
-            return reviews
+        return {"musics": items}
