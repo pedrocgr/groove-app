@@ -49,8 +49,8 @@ class FiltersService:
             albums_by_year_titles = {album['id'] for album in res1}
             songs_by_year_titles = {song['id'] for song in res2}
 
-            print(albums_by_year_titles)
-            print(songs_by_year_titles)
+            # print(albums_by_year_titles)
+            # print(songs_by_year_titles)
 
             # Se o nome for fornecido, fazemos a interseção com os álbuns filtrados por nome
             if name:
