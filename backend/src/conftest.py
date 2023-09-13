@@ -2,6 +2,14 @@ import pytest
 from fastapi.testclient import TestClient
 from typing import Generator
 from src.main import app
+from unittest.mock import patch
+
+
+@pytest.fixture(autouse=True)
+def db(mongodb):
+    with patch("src.db.database", mongodb):
+        yield
+
 
 @pytest.fixture(scope="function")
 def client() -> Generator:
@@ -10,6 +18,7 @@ def client() -> Generator:
     """
     with TestClient(app) as c:
         yield c
+
 
 @pytest.fixture
 def context():

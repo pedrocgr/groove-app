@@ -8,6 +8,7 @@ class SongCreate(BaseModel):
     genre: str
     artist: str
     release_year: int
+    cover: Optional[str] = None
     popularity: Optional[int] = 0
     available_on: Optional[object] = {}
     image_url: Optional[str] = ''
@@ -19,6 +20,7 @@ class SongModel(BaseModel):
     genre: str
     artist: str
     release_year: int
+    cover: Optional[str] = None
     popularity: Optional[int] = 0
     available_on: Optional[object] = {}
     created_at: Optional[datetime] = None
@@ -32,6 +34,7 @@ class SongGet(BaseModel):
     genre: str
     artist: str
     release_year: int
+    cover: Optional[str] = None
     popularity: Optional[int] = 0
     available_on: Optional[object] = {}
     created_at: Optional[datetime] = None
@@ -45,6 +48,7 @@ class SongCreateModel(BaseModel):
     genre: str
     artist: str
     release_year: int
+    cover: Optional[str] = None
     popularity: Optional[int] = 0
     available_on: Optional[object] = {}
     created_at: Optional[datetime] = None

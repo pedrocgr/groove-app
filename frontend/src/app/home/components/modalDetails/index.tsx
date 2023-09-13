@@ -47,13 +47,14 @@ const MusicDetail: React.FC<{
             const response = await axios.get('http://127.0.0.1:8000/songs/' + id + '/');
             const response2 = await axios.get('http://127.0.0.1:8000/songs/' + id + '/reviews');
             if(id == '65009d89de657d24ae7f1357') {
-                console.log("-----------------")
-                console.log(response.data);
-                console.log(response2.data);
-                console.log("-----------------")
-
-
+                
+                
             }
+            console.log("-----------------")
+            console.log("musicDetails")
+            console.log(response.data);
+            console.log(response2.data);
+            console.log("-----------------")
             let data = response.data;
             const aux = {
                 youtube_link: '',
