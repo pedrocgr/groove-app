@@ -207,9 +207,9 @@ def get_top_rated_songs(limit: int = 5):
 )
 def get_reviews(song_id: str):
     reviews = SongService.get_reviews(song_id)
-    for review in reviews:
-        review["id"] = str(review["_id"])
-        del review["_id"]
+    # for review in reviews:
+    #     review["id"] = str(review["_id"])
+    #     del review["_id"]
     print('-------------')
 
     print(reviews)
