@@ -3,7 +3,7 @@ import {createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Layout from '../../../shared/components/Layout';
 import Home from '../pages/Home';
 import InHigh from '../pages/InHigh';
-import MostListened from '../pages/MostListened';
+import TopRated from '../pages/TopRated';
 import Edition from '../pages/Edition';
 import Search from '../pages/Search';
 
@@ -27,8 +27,8 @@ const router = createBrowserRouter([
         Component: InHigh,
       },
       {
-        path: "/most-listened",
-        Component: MostListened,
+        path: "/top-rated",
+        Component: TopRated,
       },
       {
         path: "/edition",
