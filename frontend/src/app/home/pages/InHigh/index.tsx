@@ -83,7 +83,6 @@ const InHigh: React.FC = () => {
             name={music.title}
             image={music.image_url}
             id={music.id}
-            avg_rating={0}
           />
         ))} 
       </MusicListContainer>

@@ -11,13 +11,13 @@ from src.schemas.song import (
     SongCreate,
 )
 from src.service.impl.song_service import SongService
-from src.schemas.review import ReviewModel, ReviewList
+from src.schemas.review import ReviewGet
 from src.db import database as db
 
 router = APIRouter()
 
 
-def calculate_average_rating(reviews) -> float:
+def calculate_average_rating(reviews: list[dict]) -> float:
     ratings = [review["rating"] for review in reviews]
     if not ratings:
         return 0

@@ -70,15 +70,15 @@ const AuthorImage = styled.img`
 `;
 
 function* ratingStars(rating: number) {
-  for (let i = 0; i < Math.floor(rating / 2); i++) {
+  for (let i = 0; i < rating; i++) {
     yield <img src={starFull} width={16} height={16} />;
   }
 
-  if (rating % 2 === 1) {
-    yield <img src={starHalf} width={16} height={16} />;
-  }
+  // if (rating % 2 === 1) {
+  //   yield <img src={starHalf} width={16} height={16} />;
+  // }
 
-  for (let i = 0; i < 5 - Math.ceil(rating / 2); i++) {
+  for (let i = 0; i < 5 - rating; i++) {
     yield <img src={starEmpty} width={16} height={16} />;
   }
 }
