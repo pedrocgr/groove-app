@@ -140,7 +140,7 @@ const SongCard = (props: SongCardProps) => {
       <TextCenter>
         <Rating>
           <AverageRating>
-            <div>{props.amountReview}</div>
+            <div>{formatNumber(props.amountReview)}</div>
             <small>Avaliações</small>
           </AverageRating>
 

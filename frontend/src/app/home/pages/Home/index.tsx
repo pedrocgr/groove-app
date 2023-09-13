@@ -7,15 +7,14 @@ import ReviewCard from '../../components/ReviewCard/ReviewCard';
 import axios from 'axios';
 interface Review {
   id: number;
-  artist_name: string;
-  album_name: string;
-  review_title: string;
-  review_content: string;
+  title: string;
+  description: string;
   rating: number;
-  author_name: string;
-  author_username: string;
-  author_image_uri: string;
-  album_image_uri: string;
+  artistName: string;
+  author: string;
+  songTitle: string;
+  songCover: string;
+  image_url: string;
 }
 export const TableDiv = styled.div`
   display: flex;
@@ -55,14 +54,14 @@ const Home: React.FC = () => {
       <TableDiv>  
         {data.map((review: Review) => (
           <ReviewCard
-            songCover={review.album_image_uri}
-            songTitle={review.album_name}
-            artistName={review.artist_name}
-            rating={review.rating}
-            title={review.review_title}
-            content={review.description}
-            authorName='ana'
-            authorUsername='ana2'
+          songCover={review.songCover}
+          songTitle={review.songTitle}
+          artistName={review.artistName}
+          rating={review.rating}
+          title={review.title}
+          content={review.description}
+          authorName="Ana"
+          authorUsername="aninha"
           />
         ))}
 

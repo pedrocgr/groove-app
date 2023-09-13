@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import RegisterInput from '../Input';
 import ModalComponent from '../Modal-ui';
 import axios from 'axios';
+import { useGlobalAlert } from '../../global/GlobalProvider';
 
 const MusicForm: React.FC<{
     isOpen: boolean;
@@ -16,9 +17,10 @@ const MusicForm: React.FC<{
     const [linkSpotify, setLinkSpotify] = useState('');  // Estado para link do Spotify
     const [imageLink, setImageLink] = useState('');  // Estado para link da imagem
     const [linkApple, setlinkApple] = useState('');  // Estado para link do Apple Music
+    const [, setOptions] = useGlobalAlert();
+
 
     const handleSubmit = async (e) => {
-        // e.preventDefault();
         console.log("teste");
 
         const formData = {
@@ -40,7 +42,25 @@ const MusicForm: React.FC<{
         try {
             const response = await axios.post('http://127.0.0.1:8000/songs/create', formData);
             console.log(response.data);
+            console.log(response.data.status)
+            console.log(setOptions)
+            setOptions({
+                text:
+                    'Música criada com sucesso',
+                type: 'success',
+                open: true,
+            });
+            // if(response === 20){
 
+            // }
+            // else{
+            //     setOptions({
+            //         text:
+            //             'É necessário visualizar pelo menos uma tabela para que seja possível gerar CSV de tabelas.',
+            //         type: 'success',
+            //         open: true,
+            //     });
+            // }
             setTitle('');
             setGenre('');
             setYear('');

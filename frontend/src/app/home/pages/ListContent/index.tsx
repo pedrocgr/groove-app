@@ -1,26 +1,21 @@
-import * as React from 'react';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import Chip from '@mui/material/Chip';
+import React, { useEffect, useState } from 'react';
+import { IconButton, Button, Chip, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 import { TableVirtuoso, TableComponents } from 'react-virtuoso';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 
 import { Wallpaper, TableDiv, LabelDiv, Rick } from './style';
-import RickImage from "../../../../shared/assets/rick_astley2.png";
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import MuiButton from '../../../../shared/components/MuiButton';
+import DataTable from '../../../../shared/components/DataTable';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+import axios from 'axios';
+import EditModal from '../../../../shared/components/EditModal';
+
 
 const ListContent: React.FC = () => {
-   
-  
-
     // =====================================================================
     interface Data {
         artist: number;
@@ -147,6 +142,12 @@ const ListContent: React.FC = () => {
 
     // =====================================================================
 
+    interface Data {
+      id: number;
+      name: string;
+      description: string;
+    }
+
     interface TabPanelProps {
       children?: React.ReactNode;
       index: number;
@@ -185,6 +186,35 @@ const ListContent: React.FC = () => {
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
       setValue(newValue);
     };
+
+    // =====================================================================
+
+    interface Data {
+      id: number;
+      title: string;
+      artist: string;
+      genre: string;
+    }
+
+    const [data, setData] = useState<Data[]>([]);
+
+    useEffect(() => {
+      // Fetch data from the backend using Axios (replace with your API endpoint)
+      axios.get('http://127.0.0.1:8000/songs/').then((response) => {
+        console.log(response.data);
+        setData(response.data.songs);
+      });
+    }, []);
+
+    const handleDelete = (id: number) => {
+      // Implement delete functionality (send a DELETE request to your API)
+      axios.delete(`/api/data/${id}`).then(() => {
+        // Remove the deleted item from the state
+        setData((prevData) => prevData.filter((item) => item.id !== id));
+      });
+    };
+    
+
      
     
     return (
@@ -205,7 +235,7 @@ const ListContent: React.FC = () => {
               </Paper> 
           </TableDiv> */}
 
-          <TableDiv>
+          {/* <TableDiv>
             <Box sx={{ width: '100%' }}>
               <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                 <Tabs value={value} onChange={handleChange} centered textColor="secondary" indicatorColor="secondary" >
@@ -237,7 +267,71 @@ const ListContent: React.FC = () => {
                 <MuiButton />
               </CustomTabPanel>
             </Box>
+          </TableDiv> */}
+
+          {/* <TableDiv>
+            <TableContainer component={Paper}>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>ID</TableCell>
+                    <TableCell>Name</TableCell>
+                    <TableCell>Artist</TableCell>
+                    <TableCell>Genre</TableCell>
+                    <TableCell>Actions</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {data.map((row) => (
+                    <TableRow key={row.id}>
+                      <TableCell>{row.id}</TableCell>
+                      <TableCell>{row.title}</TableCell>
+                      <TableCell>{row.artist}</TableCell>
+                      <TableCell>{row.genre}</TableCell>
+                      <TableCell>
+                        <IconButton 
+                          color="secondary" 
+                          onClick={() => handleDelete(row.id)}
+                        >
+                          <DeleteIcon />
+                        </IconButton>
+
+                        <IconButton 
+                          color="primary" 
+                          onClick={() => handleEdit(row.id)}
+                        >
+                          <EditIcon />
+                        </IconButton>
+
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer> 
+          </TableDiv>*/}
+          
+          <TableDiv>
+            <Box sx={{ width: '100%' }}>
+              <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                <Tabs value={value} onChange={handleChange} centered textColor="inherit" indicatorColor="secondary" >
+                  <Tab label="Albuns" {...a11yProps(0)} />
+                  <Tab label="Músicas" {...a11yProps(1)} />
+                </Tabs>
+              </Box>
+              <CustomTabPanel value={value} index={0}>
+                <DataTable contentType="albums"/>
+                <MuiButton />
+              </CustomTabPanel>
+
+              <CustomTabPanel value={value} index={1}>
+                <DataTable contentType="songs"/>
+                <MuiButton />
+              </CustomTabPanel>
+            </Box>
           </TableDiv>
+
+            
         </Wallpaper>
     );
 };

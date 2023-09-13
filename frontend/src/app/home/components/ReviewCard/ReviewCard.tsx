@@ -2,6 +2,7 @@ import styled from "styled-components";
 import starEmpty from "./star-empty.svg";
 import starFull from "./star-full.svg";
 import starHalf from "./star-half.svg";
+import user from "../../../../shared/assets/user.png";
 
 export type ReviewCardProps = {
   songCover: string;
@@ -10,7 +11,6 @@ export type ReviewCardProps = {
   rating: number;
   title: string;
   content: string;
-  // authorImage: string;
   authorName: string;
   authorUsername: string;
 };
@@ -24,7 +24,8 @@ const CardWrapper = styled.div`
   padding: 16px;
   max-height: 150px;
   row-gap: 16px;
-  max-width: 600px;
+  max-width: 1200px;
+  height: 600px;
 `;
 
 const SongHeader = styled.div`
@@ -51,10 +52,6 @@ const ReviewTitle = styled.div`
   font-weight: 700;
 `;
 
-const AuthorImage = styled.img`
-  border-radius: 50%;
-`;
-
 const AuthorName = styled.div`
   font-weight: 700;
 `;
@@ -66,6 +63,10 @@ const AuthorInfo = styled.div`
 
 const AuthorUsername = styled.div`
   font-size: 11px;
+`;
+
+const AuthorImage = styled.img`
+  border-radius: 50%;
 `;
 
 function* ratingStars(rating: number) {
@@ -101,7 +102,7 @@ const ReviewCard = (props: ReviewCardProps) => {
       <div>{props.content}</div>
 
       <AuthorInfo>
-
+        <AuthorImage src={user} width={32} height={32} />
         <div>
           <AuthorName>{props.authorName}</AuthorName>
           <AuthorUsername>@{props.authorUsername}</AuthorUsername>

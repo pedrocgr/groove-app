@@ -68,7 +68,9 @@ const Header: React.FC = () => {
                   fontSize: "25px",
                   borderRadius: "0px",
                   borderBottom:
-                    activeButton === "Buscar" ? "1px solid black" : "none", // Aplica a linha quando Reviews for verdadeiro
+                    activeButton === "Buscar" 
+                    ? "1px solid black" 
+                    : "none", // Aplica a linha quando Reviews for verdadeiro
                 }}
                 isActive={activeButton === "Buscar"} // Verifique se o botão Reviews está ativo
                 onClick={() => handleButtonClick("Buscar")}
@@ -87,7 +89,9 @@ const Header: React.FC = () => {
                   fontSize: "25px",
                   borderRadius: "0px",
                   borderBottom:
-                    activeButton === "Em Alta" ? "1px solid black" : "none",
+                    activeButton === "Em Alta" 
+                    ? "1px solid black" 
+                    : "none",
                 }} // Aplica a linha quando Em Alta for verdadeiro
                 isActive={activeButton === "Em Alta"} // Verifique se o botão Em Alta está ativo
                 onClick={() => handleButtonClick("Em Alta")}
@@ -96,7 +100,7 @@ const Header: React.FC = () => {
               </ButtonComponent>
             </Link>
 
-            <Link to="/most-listened">
+            <Link to="/top-rated">
               <ButtonComponent
                 customStyle={{
                   backgroundColor: "transparent",

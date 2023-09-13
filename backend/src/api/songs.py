@@ -1,36 +1,60 @@
 from fastapi import APIRouter, HTTPException
 from starlette.responses import JSONResponse
-from src.schemas.song import SongGet, SongModel, SongDelete, SongList, SongNameList, SongCreateModel, GetSongsTopRated, SongCreate
+from src.schemas.song import (
+    SongGet,
+    SongModel,
+    SongDelete,
+    SongList,
+    SongNameList,
+    SongCreateModel,
+    GetSongsTopRated,
+    SongCreate,
+)
 from src.service.impl.song_service import SongService
 from src.schemas.review import ReviewModel, ReviewList
+from src.db import database as db
 
 router = APIRouter()
 
 
+def calculate_average_rating(reviews) -> float:
+    ratings = [review["rating"] for review in reviews]
+    if not ratings:
+        return 0
+    return sum(ratings) / len(ratings)
+
+
 @router.get(
     "/{song_id}",
-    response_model=SongModel,
+    response_model=dict,
     response_class=JSONResponse,
     summary="Get a specific song",
 )
 def get_song(song_id: str):
-    song_get_response = SongService.get_song(song_id)
+    song = SongService.get_song(song_id)
 
-    if not song_get_response:
-        raise HTTPException(status_code=404, detail="Song not found")
+    reviews = db.find("reviews", {"song": song_id})
+    print('-------------')
 
-    return song_get_response
+    print(reviews)
+    print('-------------')
+    song["average_rating"] = calculate_average_rating(reviews)
+    song["id"] = song_id
+    del song["_id"]
+    return song
 
 
 @router.get(
     "/",
     response_model=SongList,
     response_class=JSONResponse,
-    description="Retrieve all songs"
+    description="Retrieve all songs",
 )
 def get_songs():
     songs = SongService.get_songs()
-    return {'songs': songs, }
+    return {
+        "songs": songs,
+    }
 
 
 @router.put(
@@ -97,11 +121,9 @@ def get_highlighted():
             song['average_rating'] = 0
         del song['_id']
 
-    songs = sorted(songs, key=lambda x: x['popularity'], reverse=True)
+    songs = sorted(songs, key=lambda x: x["popularity"], reverse=True)
 
-    return {
-        "songs": songs
-    }
+    return {"songs": songs}
 
 
 @router.get(
@@ -173,9 +195,7 @@ def get_top_rated_songs(limit: int = 5):
         song['image_url'] = real_data_songs['image_url']
         song["id"] = song["song"]
     print(songs)
-    response = {
-        "songs": songs
-    }
+    response = {"songs": songs}
     return response
 
 
@@ -186,9 +206,10 @@ def get_top_rated_songs(limit: int = 5):
     summary="Get reviews of a specific song",
 )
 def get_reviews(song_id: str):
-
     reviews = SongService.get_reviews(song_id)
-
+    # for review in reviews:
+    #     review["id"] = str(review["_id"])
+    #     del review["_id"]
     print('-------------')
 
     print(reviews)

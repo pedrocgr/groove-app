@@ -17,7 +17,7 @@ const fakeMusicList = [
   { artist: "Artista 10", name: "Música 10", image: MusicImage },
 ];
 
-const InHigh: React.FC = () => {
+const TopRated: React.FC = () => {
   interface SearchResult {
     id: string;
     title: string;
@@ -47,22 +47,22 @@ const InHigh: React.FC = () => {
       aux.push(song);
     }
     );
-    console.log('******************************');
+    console.log('***************');
 
     console.log(aux);
-    console.log('******************************');
+    console.log('***************');
     setTrueMusicList(aux);
   };
   const fetchData = async () => {
     try {
-      const response = await axios.get('http://127.0.0.1:8000/songs/songs_h/highlighted', {
+      const response = await axios.get('http://127.0.0.1:8000/songs/songs_r/top-rated', {
       });
       
       const data: SearchResult[] = response.data;
-      console.log('---------------');
+      console.log('******************************');
 
       console.log(data);
-      console.log('---------------');
+      console.log('******************************');
       handleResponse(response.data);
       // setSearchResults(data);
     } catch (error) {
@@ -83,7 +83,7 @@ const InHigh: React.FC = () => {
             name={music.title}
             image={music.image_url}
             id={music.id}
-            avg_rating={0}
+            avg_rating={music.average_rating}
           />
         ))} 
       </MusicListContainer>
@@ -91,4 +91,4 @@ const InHigh: React.FC = () => {
   );
 };
 
-export default InHigh;
+export default TopRated;
