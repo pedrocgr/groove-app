@@ -100,7 +100,7 @@ const Header: React.FC = () => {
               </ButtonComponent>
             </Link>
 
-            <Link to="/most-listened">
+            <Link to="/top-rated">
               <ButtonComponent
                 customStyle={{
                   backgroundColor: "transparent",
