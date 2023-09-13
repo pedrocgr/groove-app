@@ -214,7 +214,7 @@ const SearchFilterComponent: React.FC<SearchFilterProps> = ({
                   name={result.title}
                   image={result.image_url}
                   id={result.id}
-                  
+                    avg_rating={result.average_rating}
                 />
               ))}
               </ResultItemsDiv>

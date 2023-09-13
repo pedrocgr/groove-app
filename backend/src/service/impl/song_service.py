@@ -42,7 +42,12 @@ class SongService:
     @staticmethod
     def get_highlighted():
         highlighted = db.get_all_items('songs')
-
+        print('----------------')
+        print(highlighted)
+        print('----------------')
+        for highlight in highlighted:
+            if 'popularity' not in highlight:
+                highlight['popularity'] = 0
         highlighted.sort(key=lambda x: x['popularity'], reverse=True)
         highlighted = highlighted[:10]
 
