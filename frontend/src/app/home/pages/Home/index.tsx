@@ -18,13 +18,12 @@ interface Review {
 }
 export const TableDiv = styled.div`
   display: flex;
-  justify-content: space-between;
   width: 100%;
   max-width: 60vw;
   flex-direction: column;
-  gap: 12%;
+  gap: 16px;
   margin: auto;
-  margin-top: 1%;
+  padding-top: 160px;
 `;
 const Home: React.FC = () => {
   const [data, setData] = React.useState([]);
@@ -51,20 +50,19 @@ const Home: React.FC = () => {
 
   return (
     <Wallpaper>
-      <TableDiv>  
+      <TableDiv>
         {data.map((review: Review) => (
           <ReviewCard
-          songCover={review.songCover}
-          songTitle={review.songTitle}
-          artistName={review.artistName}
-          rating={review.rating}
-          title={review.title}
-          content={review.description}
-          authorName="Ana"
-          authorUsername="aninha"
+            songCover={review.songCover}
+            songTitle={review.songTitle}
+            artistName={review.artistName}
+            rating={review.rating}
+            title={review.title}
+            content={review.description}
+            authorName="Breno"
+            authorUsername="breninho"
           />
         ))}
-
       </TableDiv>
     </Wallpaper>
   );
