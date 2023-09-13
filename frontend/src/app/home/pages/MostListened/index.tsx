@@ -17,7 +17,7 @@ const fakeMusicList = [
   { artist: "Artista 10", name: "Música 10", image: MusicImage },
 ];
 
-const mostListened: React.FC = () => {
+const TopRated: React.FC = () => {
   interface SearchResult {
     id: string;
     title: string;
@@ -91,4 +91,4 @@ const mostListened: React.FC = () => {
   );
 };
 
-export default mostListened;
+export default TopRated;
