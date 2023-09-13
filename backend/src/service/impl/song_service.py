@@ -147,6 +147,7 @@ class SongService:
 
     @staticmethod
     def get_reviews(song_id: str):
-        reviews = db.find("reviews", {"song": song_id})
+
+        reviews = db.get_reviews_by_song(song_id)
 
         return reviews
