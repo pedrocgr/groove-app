@@ -1,8 +1,6 @@
 import styled from "styled-components";
 import starEmpty from "./star-empty.svg";
 import starFull from "./star-full.svg";
-import starHalf from "./star-half.svg";
-import user from "../../../../shared/assets/user.png";
 
 export type ReviewCardProps = {
   songCover: string;

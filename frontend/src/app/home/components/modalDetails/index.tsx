@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ModalComponent from "../Modal-ui";
 import axios from "axios";
-import ReviewCard from "../ReviewCard/ReviewCard";
+import SongReviewCard from "../../../../../src/app/home/components/SongReviewCard/SongReviewCard";
 import SongCard from "../../../../../src/app/home/components/SongCard/SongCard";
 
 interface MusicData {
@@ -21,14 +21,14 @@ interface MusicData {
   image_url: string;
   average_rating: number;
 }
+
 interface Review {
-  // added this for clarity
   id: number;
+  title: string;
+  description: string;
   rating: number;
-  comment: string;
-  created_at: string;
-  user: string;
 }
+
 const MusicDetail: React.FC<{
   isOpen: boolean;
   setIsOpen: (value: boolean) => void;
@@ -106,16 +106,19 @@ const MusicDetail: React.FC<{
                 youtubeLink={data.available_on.youtube_link}
               />
               {reviews.length > 0 ? (
-                reviews.map((review: Review) => (
-                  <ReviewCard
-                    key={review.id}
-                    id={review.id}
-                    rating={review.rating}
-                    comment={review.comment}
-                    createdAt={review.created_at}
-                    user={review.user}
-                  />
-                ))
+                <div className="reviews-container">
+                  {reviews.map((review: Review) => (
+                    <div className="review-card" key={review.id}>
+                      <SongReviewCard
+                        title={review.title}
+                        rating={review.rating}
+                        description={review.description}
+                        authorName="Breno"
+                        authorUsername="breninho"
+                      />
+                    </div>
+                  ))}
+                </div>
               ) : (
                 <div>No reviews available.</div>
               )}
@@ -125,6 +128,16 @@ const MusicDetail: React.FC<{
           )
         }
       />
+      <style jsx>{`
+        .reviews-container {
+          display: flex;
+          flex-direction: column;
+        }
+
+        .review-card {
+          margin-bottom: 20px;
+        }
+      `}</style>
     </div>
   );
 };
