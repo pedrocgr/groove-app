@@ -81,7 +81,7 @@ const MusicDetail: React.FC<{
         }}
         title="Detalhes da música"
         textExit=""
-        textSubmit=""
+        textSubmit="Avalie esta música"
         onClick={(e) => handleSubmit(e)}
         onCancel={() => {
           setIsOpen(false);

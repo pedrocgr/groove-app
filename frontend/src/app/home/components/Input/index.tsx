@@ -19,6 +19,7 @@ type Props = {
   isAdjustStock?: boolean;
   style?: React.CSSProperties;
   noMargin?: boolean;
+  'data_cy'?: string;
 };
 
 function RegisterInput({
@@ -31,6 +32,7 @@ function RegisterInput({
   type,
   style,
   noMargin,
+  data_cy,
 }: Props) {
   return (
     <InputContainer style={style} className="input-container" noMargin={noMargin}>
@@ -38,6 +40,7 @@ function RegisterInput({
 
       {
         <Input
+          data-cy={data_cy}
           disabled={disabled}
           id={id}
           type={'text'}
