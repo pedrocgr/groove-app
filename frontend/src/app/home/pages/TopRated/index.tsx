@@ -12,6 +12,7 @@ const TopRated: React.FC = () => {
     image_url: string;
     popularity: number;
     release_year: number;
+    average_rating: number;
   }
   interface ReponseTrue {
     albums: SearchResult[];
@@ -59,6 +60,7 @@ const TopRated: React.FC = () => {
             name={music.title}
             image={music.image_url}
             id={music.id}
+            average_rating={music.average_rating}
             data_cy={music.title}
             data2_cy={music.image_url}
           />
