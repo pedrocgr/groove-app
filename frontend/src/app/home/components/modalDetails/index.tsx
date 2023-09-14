@@ -55,7 +55,7 @@ const MusicDetail: React.FC<{
       console.log(response.data);
       console.log(response2.data);
       console.log("-----------------");
-      let data = response.data;
+      const data = response.data;
       const aux = {
         youtube_link: "",
         deezer_link: "",

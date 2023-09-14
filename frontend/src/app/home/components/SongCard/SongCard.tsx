@@ -145,7 +145,10 @@ const SongCard = (props: SongCardProps) => {
           </AverageRating>
 
           <AverageRating>
-            <div><RatingStar src={starFull} alt="Star" /> {props.averageRating.toFixed(1)} / 5</div>
+            <div>
+              <RatingStar src={starFull} alt="Star" />{" "}
+              {props.averageRating.toFixed(1)} / 5
+            </div>
             <small>Nota média</small>
           </AverageRating>
         </Rating>

@@ -6,7 +6,7 @@ export const flexcc = css`
   align-items: center;
 `;
 
-export const flex = (justify: string = 'unset', align: string = 'unset', direction: string = 'unset', wrap: string = 'unset') => css`
+export const flex = (justify = 'unset', align = 'unset', direction = 'unset', wrap = 'unset') => css`
   display: flex;
   justify-content: ${justify};
   align-items: ${align};

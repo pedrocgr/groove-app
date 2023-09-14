@@ -83,7 +83,8 @@ const TopRated: React.FC = () => {
             name={music.title}
             image={music.image_url}
             id={music.id}
-            avg_rating={music.average_rating}
+            data_cy-topRated={music.title}
+            data2_cy-topRated={music.image_url}
           />
         ))} 
       </MusicListContainer>
