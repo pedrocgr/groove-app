@@ -33,6 +33,7 @@ export const MusicArtist = styled.p`
     color: black;
     font-size: 12px;
     font-weight: 300;
+    margin-bottom: 0px;
 `;
 
 export const MusicName = styled.p`
@@ -40,6 +41,7 @@ export const MusicName = styled.p`
     font-size: 20px;
     margin-top: 8px;
     font-weight: 500;
+    margin-bottom: 0px;
 `;
 
 export const MusicRating = styled.span`
