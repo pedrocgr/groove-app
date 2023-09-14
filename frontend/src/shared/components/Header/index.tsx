@@ -116,6 +116,7 @@ const Header: React.FC = () => {
                 }}
                 isActive={activeButton === "Melhores Avaliadas"} // Verifique se o botão Mais Escutadas está ativo
                 onClick={() => handleButtonClick("Melhores Avaliadas")}
+                data_cy = "top-rated"
               >
                 Melhores Avaliadas
               </ButtonComponent>
