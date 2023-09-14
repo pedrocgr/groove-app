@@ -12,6 +12,8 @@ export const ModalContainer = styled.div`
   background-color: white;
   box-shadow: 0px 3px 6px #00000029;
   z-index: 1000000000;
+  max-height: 80vh;
+  overflow-y: auto;
 `;
 
 export const Button = styled.button<ButtonColor>`
