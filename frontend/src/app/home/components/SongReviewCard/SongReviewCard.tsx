@@ -1,13 +1,11 @@
 import styled from "styled-components";
 import starEmpty from "./star-empty.svg";
 import starFull from "./star-full.svg";
-import starHalf from "./star-half.svg";
 
 export type SongReviewCardProps = {
   rating: number;
   title: string;
-  content: string;
-  authorImage: string;
+  description: string;
   authorName: string;
   authorUsername: string;
 };
@@ -20,7 +18,8 @@ const CardWrapper = styled.div`
   flex-direction: column;
   padding: 16px;
   row-gap: 16px;
-  max-width: 600px;
+  max-width: 600x;
+  max-lenght: 1000px;
 `;
 
 const ReviewTitle = styled.div`
@@ -45,29 +44,33 @@ const AuthorUsername = styled.div`
 `;
 
 function* ratingStars(rating: number) {
-  for (let i = 0; i < Math.floor(rating / 2); i++) {
+  for (let i = 0; i < rating; i++) {
     yield <img src={starFull} width={16} height={16} />;
   }
 
-  if (rating % 2 === 1) {
-    yield <img src={starHalf} width={16} height={16} />;
-  }
+  // if (rating % 2 === 1) {
+  //   yield <img src={starHalf} width={16} height={16} />;
+  // }
 
-  for (let i = 0; i < 5 - Math.ceil(rating / 2); i++) {
+  for (let i = 0; i < 5 - rating; i++) {
     yield <img src={starEmpty} width={16} height={16} />;
   }
 }
 
-export const SongReviewCard = (props: SongReviewCardProps) => {
+const SongReviewCard = (props: SongReviewCardProps) => {
   return (
     <CardWrapper>
       <ReviewTitle>{props.title}</ReviewTitle>
-      <div>{props.content}</div>
-      <div>
-        {[...ratingStars(props.rating)]}
-      </div>
+      <div>{props.description}</div>
+      <div>{[...ratingStars(props.rating)]}</div>
       <AuthorInfo>
-        <AuthorImage src={props.authorImage} width={50} height={50} />
+        <AuthorImage
+          src={
+            "https://lh3.googleusercontent.com/a-/ALV-UjV8waNex-VytHpyJ4-_agY-EWhvWYx3YbECLw4NaGDFuCQ=s272-p-k-rw-no"
+          }
+          width={50}
+          height={50}
+        />
         <div>
           <AuthorName>{props.authorName}</AuthorName>
           <AuthorUsername>@{props.authorUsername}</AuthorUsername>
@@ -76,3 +79,5 @@ export const SongReviewCard = (props: SongReviewCardProps) => {
     </CardWrapper>
   );
 };
+
+export default SongReviewCard;
