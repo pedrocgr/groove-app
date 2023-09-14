@@ -25,7 +25,7 @@ const AlbumForm: React.FC<{
             'genre': genre,
             'release_year': Number(year),
             'artist': artist,
-            'image_url': imageLink,
+            'cover': imageLink,
             'available_on': {
                 'youtube_link': linkYouTube,
                 'deezer_link': linkDeezer,

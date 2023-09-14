@@ -34,7 +34,7 @@ const MusicForm: React.FC<{
                 'spotify_link': linkSpotify,
                 'apple_music_link': linkApple,
             },
-            'image_url': imageLink
+            'cover': imageLink
         };
 
         console.log(formData);

@@ -23,7 +23,7 @@ const TopRated: React.FC = () => {
     title: string;
     artist: string;
     available_on: object;
-    image_url: string;
+    cover: string;
     popularity: number;
     release_year: number;
   }
@@ -42,7 +42,7 @@ const TopRated: React.FC = () => {
   const handleResponse = (response: ResultReponse) => {
     const aux = [];
     response.songs.forEach((song) => {
-      // song.image_url = 'https://upload.wikimedia.org/wikipedia/pt/3/3c/Capa_de_Lover.png'
+      // song.cover = 'https://upload.wikimedia.org/wikipedia/pt/3/3c/Capa_de_Lover.png'
 
       aux.push(song);
     }
@@ -81,7 +81,7 @@ const TopRated: React.FC = () => {
             key={index}
             artist={music.artist}
             name={music.title}
-            image={music.image_url}
+            image={music.cover}
             id={music.id}
             avg_rating={music.average_rating}
           />

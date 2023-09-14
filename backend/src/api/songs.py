@@ -192,7 +192,7 @@ def get_top_rated_songs(limit: int = 5):
         real_data_songs = SongService.get_song(song['song'])
         song['title'] = real_data_songs['title']
         song['artist'] = real_data_songs['artist']
-        song['image_url'] = real_data_songs['image_url']
+        song['cover'] = real_data_songs['cover']
         song["id"] = song["song"]
     print(songs)
     response = {"songs": songs}

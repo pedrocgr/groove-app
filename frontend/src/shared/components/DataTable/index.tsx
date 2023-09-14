@@ -146,14 +146,14 @@ const DataTable: React.FC<DataTableProps> = ({contentType}) => {
         <TableBody>
           {data.length === 0 ? ( // Check if there's no data
             <TableRow>
-                <TableCell colSpan={4}>No data available</TableCell>
+                <TableCell align="center" colSpan={6}>No data available</TableCell>
             </TableRow>
           ) : (
           data.map((row) => (
             <TableRow key={row.id}>
               <TableCell align="center">
                 <img
-                  src='https://www.ufpe.br/documents/40615/3693828/fotbrenomiranda_09.09.21ppp.png/8f9acbfa-e0e2-4cc7-b4c5-d34f2424b29b?t=1631211217046' //{row.cover} // Assuming 'image_url' is the URL property in your data
+                  src={row.cover}
                   alt="Imagem"
                   style={{ width: '50px', height: 'auto', borderRadius: '15%' }}
                 />

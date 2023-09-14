@@ -212,7 +212,7 @@ const SearchFilterComponent: React.FC<SearchFilterProps> = ({
                   key={result.id}
                   artist={result.artist}
                   name={result.title}
-                  image={result.image_url}
+                  image={result.cover}
                   id={result.id}
                     avg_rating={result.average_rating}
                 />

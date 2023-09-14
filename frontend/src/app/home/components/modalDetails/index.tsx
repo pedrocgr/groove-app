@@ -18,7 +18,7 @@ interface MusicData {
     apple_music_link: string;
   };
   created_at: string;
-  image_url: string;
+  cover: string;
   average_rating: number;
 }
 
@@ -95,7 +95,7 @@ const MusicDetail: React.FC<{
                 id={data.id}
                 title={data.title}
                 artistName={data.artist}
-                songCover={data.image_url}
+                songCover={data.cover}
                 genre={data.genre}
                 releaseYear={data.release_year}
                 averageRating={data.average_rating}

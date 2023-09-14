@@ -24,7 +24,7 @@ def get_reviews():
     print('-------------------------------')
     for review in review_list_response:
         song = SongService.get_song(review['song'])
-        review['songCover'] = song['image_url']
+        review['songCover'] = song['cover']
         review['songTitle'] = song['title']
         review['artistName'] = song['artist']
 

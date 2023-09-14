@@ -185,7 +185,7 @@ const EditModal: React.FC<EditModalProps> = ({ open, onClose, isEditingAlbum, it
             <Grid item xs={6}>
               <TextField
                 required
-                name="image_url"
+                name="cover"
                 label="Link para imagem"
                 fullWidth
                 value={formData.cover}
