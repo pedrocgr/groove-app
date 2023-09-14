@@ -29,10 +29,11 @@ const MusicCard: React.FC<{
   name: string;
   image: string;
   id: string;
+  dataa_cy?: string;
   average_rating?: number;
   data_cy?: string;
   data2_cy?: string;
-}> = ({ artist, name, image, id, average_rating, data2_cy, data_cy }) => {
+}> = ({ artist, name, image, id, average_rating, data2_cy, data_cy, dataa_cy }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
