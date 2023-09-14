@@ -14,6 +14,7 @@ import axios from 'axios';
 import EditModal from '../../../../shared/components/EditModal';
 import MusicForm from '../../components/MusicFromsRegister';
 import AlbumForm from '../../components/AlbumFormsRegister';
+import ReviewForm from '../../components/ReviewFormsRegister';
 
 const ListContent: React.FC = () => {
 
@@ -91,6 +92,7 @@ const ListContent: React.FC = () => {
 
     const [isOpenMusic, setIsOpenMusic] = useState(false);
     const [isOpenAlbum, setIsOpenAlbum] = useState(false);
+    const [isOpenReview, setIsOpenReview] = useState(false);
     
     return (
         <Wallpaper>
@@ -102,19 +104,27 @@ const ListContent: React.FC = () => {
                 <Tabs value={value} onChange={handleChange} centered textColor="inherit" indicatorColor="secondary" >
                   <Tab label="Albuns" {...a11yProps(0)} />
                   <Tab label="Músicas" {...a11yProps(1)} />
+                  <Tab label="Avaliações" {...a11yProps(2)} />
                 </Tabs>
               </Box>
               <CustomTabPanel value={value} index={0}>
                 <DataTable contentType="albums"/>
                 <Stack direction="row" spacing={2}>
-                  <Button onClick={() => setIsOpenAlbum(true)}  variant="contained" color="secondary" startIcon={<AddIcon />}>Adicionar Album</Button>
+                  <Button data-cy="add_album" onClick={() => setIsOpenAlbum(true)}  variant="contained" color="secondary" startIcon={<AddIcon />}>Adicionar Album</Button>
                 </Stack>
               </CustomTabPanel>
 
               <CustomTabPanel value={value} index={1}>
                 <DataTable contentType="songs"/>
                 <Stack direction="row" spacing={2}>
-                  <Button onClick={() => setIsOpenMusic(true)} variant="contained" color="secondary" startIcon={<AddIcon />}>Adicionar Música</Button>
+                  <Button data-cy="add_musica" onClick={() => setIsOpenMusic(true)} variant="contained" color="secondary" startIcon={<AddIcon />}>Adicionar Música</Button>
+                </Stack>
+              </CustomTabPanel>
+
+              <CustomTabPanel value={value} index={2}>
+                <DataTable contentType="reviews"/>
+                <Stack direction="row" spacing={2}>
+                  <Button data-cy="add_review" onClick={() => setIsOpenReview(true)}  variant="contained" color="secondary" startIcon={<AddIcon />}>Adicionar Avaliação</Button>
                 </Stack>
               </CustomTabPanel>
             </Box>
@@ -123,6 +133,7 @@ const ListContent: React.FC = () => {
           <MusicListContainer>
             <MusicForm isOpen={isOpenMusic} setIsOpen={setIsOpenMusic}/>
             <AlbumForm isOpen={isOpenAlbum} setIsOpen={setIsOpenAlbum}/>
+            <ReviewForm isOpen={isOpenReview} setIsOpen={setIsOpenReview}/>
           </MusicListContainer>
         </Wallpaper>
     );
