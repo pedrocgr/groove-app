@@ -15,8 +15,8 @@ export const ModalContainer = styled.div`
 `;
 
 export const Button = styled.button<ButtonColor>`
-  width: 100px;
-  height: 20px;
+  width: 150px;
+  height: 50px;
   margin-right: 20px;
   font-weight: 600;
   border: none;
