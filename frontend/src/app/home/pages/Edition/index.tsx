@@ -15,6 +15,7 @@ import EditModal from '../../../../shared/components/EditModal';
 import MusicForm from '../../components/MusicFromsRegister';
 import AlbumForm from '../../components/AlbumFormsRegister';
 import ReviewForm from '../../components/ReviewFormsRegister';
+import DataTableReview from '../../../../shared/components/DataTableReview';
 
 const ListContent: React.FC = () => {
 
@@ -122,7 +123,7 @@ const ListContent: React.FC = () => {
               </CustomTabPanel>
 
               <CustomTabPanel value={value} index={2}>
-                <DataTable contentType="reviews"/>
+                <DataTableReview/>
                 <Stack direction="row" spacing={2}>
                   <Button data-cy="add_review" onClick={() => setIsOpenReview(true)}  variant="contained" color="secondary" startIcon={<AddIcon />}>Adicionar Avaliação</Button>
                 </Stack>

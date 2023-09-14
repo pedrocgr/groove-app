@@ -20,7 +20,7 @@ export const LabelDiv = styled.div`
   background-color: #ff66c4;
   display: flex;
   margin: auto;
-  margin-top: 100px;
+  margin-top: 150px;
   // background-color: red;
   flex-basis: 100%;
   font-weight: 100;

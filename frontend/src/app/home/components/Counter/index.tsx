@@ -37,6 +37,6 @@ function Counter({ label, value, setValue, id, max, className, data_cy }: { labe
       </CounterContainer>
     </FlexContainer>
   );
-};
+}
 
 export default Counter;
