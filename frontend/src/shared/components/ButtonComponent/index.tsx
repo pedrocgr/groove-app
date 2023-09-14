@@ -7,7 +7,7 @@ interface ButtonProps {
   children: React.ReactNode;
   onClick?: () => void;
   isActive?: boolean;
-  data_cy-topRated?: string;
+  data_cy?: string;
 }
 
 const ButtonComponent: React.FC<ButtonProps> = ({
@@ -16,7 +16,7 @@ const ButtonComponent: React.FC<ButtonProps> = ({
   children,
   onClick,
   isActive,
-  data_cy-topRated,
+  data_cy,
 }) => {
   return (
     <ButtonWrapper
@@ -25,7 +25,7 @@ const ButtonComponent: React.FC<ButtonProps> = ({
         ...customStyle,
       }}
       onClick={onClick}
-      data-cy={data_cy-topRated}
+      data-cy={data_cy}
     >
       {children}
     </ButtonWrapper>
