@@ -104,7 +104,7 @@ const ListContent: React.FC = () => {
               <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                 <Tabs value={value} onChange={handleChange} centered textColor="inherit" indicatorColor="secondary" >
                   <Tab label="Albuns" {...a11yProps(0)} />
-                  <Tab label="Músicas" {...a11yProps(1)} />
+                  <Tab data-cy="music" label="Músicas" {...a11yProps(1)} />
                   <Tab label="Avaliações" {...a11yProps(2)} />
                 </Tabs>
               </Box>
