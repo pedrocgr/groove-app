@@ -3,6 +3,7 @@ import { IconButton, Button, Paper, Table, TableBody, TableCell, TableContainer,
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import EditModal from '../EditModal';
+import Swal from 'sweetalert2'
 import axios from 'axios';
 
 interface Data {
@@ -11,6 +12,7 @@ interface Data {
     artist: string;
     genre: string;
     release_year: number;
+    cover: string;
 }
 
 interface DataTableProps {
@@ -29,11 +31,9 @@ const DataTable: React.FC<DataTableProps> = ({contentType}) => {
   useEffect(() => {
     let apiUrl: string;
 
-    // Determine the API route based on the contentType prop
     if (contentType === 'songs') {
         apiUrl = 'http://127.0.0.1:8000/songs/';
 
-        // Fetch data from the backend using Axios (replace with your API endpoint)
         axios.get(apiUrl).then((response) => {
             console.log(response.data);
             setData(response.data.songs);
@@ -41,7 +41,6 @@ const DataTable: React.FC<DataTableProps> = ({contentType}) => {
     } else if (contentType === 'albums') {
         apiUrl = 'http://127.0.0.1:8000/albums/';
 
-        // Fetch data from the backend using Axios (replace with your API endpoint)
         axios.get(apiUrl).then((response) => {
             console.log(response.data);
             setData(response.data.albums);
@@ -49,25 +48,73 @@ const DataTable: React.FC<DataTableProps> = ({contentType}) => {
     }
   }, [contentType]);
 
+
   const handleDelete = (id: string) => {
     let apiUrl: string;
-    
-    // Determine the API route based on the contentType prop
-    if (contentType === 'songs') {
-        apiUrl = `http://127.0.0.1:8000/songs/${id}`;
 
-        axios.delete(apiUrl).then(() => {
-            // Remove the deleted item from the state
-            setData((prevData) => prevData.filter((item) => item.id !== id));
-        });
-    } else if (contentType === 'albums') {
-        apiUrl = `http://127.0.0.1:8000/albums/${id}`;
+    Swal.fire({
+      title: 'Você tem certeza?',
+      text: "Esta ação não é reversível!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: 'secondary',
+      cancelButtonColor: '#d33',
+      cancelButtonText:'Cancelar',
+      confirmButtonText: 'Sim, deletar!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        
+        // Determine the API route based on the contentType prop
+        if (contentType === 'songs') {
+          apiUrl = `http://127.0.0.1:8000/songs/${id}`;
 
-        axios.delete(apiUrl).then(() => {
-            // Remove the deleted item from the state
-            setData((prevData) => prevData.filter((item) => item.id !== id));
-        });
-    }
+          axios.delete(apiUrl).then((response) => {
+            if(response.status === 200){
+              // Remove the deleted item from the state
+              setData((prevData) => prevData.filter((item) => item.id !== id));
+              
+              Swal.fire(
+                'Deleted!',
+                'Your file has been deleted.',
+                'success'
+              )
+            }
+            else{
+              Swal.fire(
+                'Error!',
+                'Your file has not been deleted.',
+                'error'
+              )
+            }
+          });
+        } else if (contentType === 'albums') {
+          apiUrl = `http://127.0.0.1:8000/albums/${id}`;
+
+          axios.delete(apiUrl).then((response) => {
+              console.log(response.data);
+              console.log(response);
+
+              if(response.status === 200){
+                // Remove the deleted item from the state
+                setData((prevData) => prevData.filter((item) => item.id !== id));
+                
+                Swal.fire(
+                  'Deleted!',
+                  'Your file has been deleted.',
+                  'success'
+                )
+              }
+              else{
+                Swal.fire(
+                  'Error!',
+                  'Your file has not been deleted.',
+                  'error'
+                )
+              }
+          });
+        }  
+      }
+    }) 
   };
 
   const handleEdit = (id: string) => {
@@ -84,17 +131,16 @@ const DataTable: React.FC<DataTableProps> = ({contentType}) => {
   };
 
   return (
-    <TableContainer component={Paper} style={{ marginBottom: '20px' }}>
+    <TableContainer component={Paper} style={{ marginBottom: '20px', maxHeight: '50vh' }}>
       <Table>
-        <TableHead>
+        <TableHead style={{ position: 'sticky', top: 0, backgroundColor: 'white', zIndex: 1 }}>
           <TableRow>
-            {/* <TableCell>ID</TableCell> */}
-            <TableCell>Imagem</TableCell>
-            <TableCell>Nome</TableCell>
-            <TableCell>Artista</TableCell>
-            <TableCell>Gênero</TableCell>
-            <TableCell>Ano de lançamento</TableCell>
-            <TableCell>Actions</TableCell>
+            <TableCell align="center">Capa</TableCell>
+            <TableCell align="center">Nome</TableCell>
+            <TableCell align="center">Artista</TableCell>
+            <TableCell align="center">Gênero</TableCell>
+            <TableCell align="center">Ano de lançamento</TableCell>
+            <TableCell align="center">Actions</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -105,13 +151,18 @@ const DataTable: React.FC<DataTableProps> = ({contentType}) => {
           ) : (
           data.map((row) => (
             <TableRow key={row.id}>
-              {/* <TableCell>{row.id}</TableCell> */}
-              <TableCell>Imagem</TableCell>
-              <TableCell>{row.title}</TableCell>
-              <TableCell>{row.artist}</TableCell>
-              <TableCell>{row.genre}</TableCell>
-              <TableCell>{row.release_year}</TableCell>
-              <TableCell>
+              <TableCell align="center">
+                <img
+                  src='https://www.ufpe.br/documents/40615/3693828/fotbrenomiranda_09.09.21ppp.png/8f9acbfa-e0e2-4cc7-b4c5-d34f2424b29b?t=1631211217046' //{row.cover} // Assuming 'image_url' is the URL property in your data
+                  alt="Imagem"
+                  style={{ width: '50px', height: 'auto', borderRadius: '15%' }}
+                />
+              </TableCell>
+              <TableCell align="center">{row.title}</TableCell>
+              <TableCell align="center">{row.artist}</TableCell>
+              <TableCell align="center">{row.genre}</TableCell>
+              <TableCell align="center">{row.release_year}</TableCell>
+              <TableCell align="center">
                 <IconButton 
                     color="primary" 
                     onClick={() => handleEdit(row.id)}
@@ -131,18 +182,6 @@ const DataTable: React.FC<DataTableProps> = ({contentType}) => {
         )}
         </TableBody>
       </Table>
-
-      {/* <Button
-        variant="contained"
-        color="primary"
-        onClick={() => {
-        // Open the edit modal for adding a new item
-        setIsEditModalOpen(true);
-        setIsEditingAlbum(contentType === 'albums');
-        }}
-    >
-        Add New {contentType === 'albums' ? 'Album' : 'Song'}
-    </Button> */}
     
     <EditModal
         open={isEditModalOpen}
