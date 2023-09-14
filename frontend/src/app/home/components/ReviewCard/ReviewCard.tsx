@@ -1,8 +1,6 @@
 import styled from "styled-components";
 import starEmpty from "./star-empty.svg";
 import starFull from "./star-full.svg";
-import starHalf from "./star-half.svg";
-import user from "../../../../shared/assets/user.png";
 
 export type ReviewCardProps = {
   songCover: string;
@@ -22,10 +20,8 @@ const CardWrapper = styled.div`
   display: flex;
   flex-direction: column;
   padding: 16px;
-  max-height: 150px;
   row-gap: 16px;
   max-width: 1200px;
-  height: 600px;
 `;
 
 const SongHeader = styled.div`
@@ -58,6 +54,7 @@ const AuthorName = styled.div`
 
 const AuthorInfo = styled.div`
   display: flex;
+  align-items: center;
   column-gap: 8px;
 `;
 
@@ -70,15 +67,15 @@ const AuthorImage = styled.img`
 `;
 
 function* ratingStars(rating: number) {
-  for (let i = 0; i < Math.floor(rating / 2); i++) {
+  for (let i = 0; i < rating; i++) {
     yield <img src={starFull} width={16} height={16} />;
   }
 
-  if (rating % 2 === 1) {
-    yield <img src={starHalf} width={16} height={16} />;
-  }
+  // if (rating % 2 === 1) {
+  //   yield <img src={starHalf} width={16} height={16} />;
+  // }
 
-  for (let i = 0; i < 5 - Math.ceil(rating / 2); i++) {
+  for (let i = 0; i < 5 - rating; i++) {
     yield <img src={starEmpty} width={16} height={16} />;
   }
 }
@@ -102,11 +99,13 @@ const ReviewCard = (props: ReviewCardProps) => {
       <div>{props.content}</div>
 
       <AuthorInfo>
-        <AuthorImage src={user} width={32} height={32} />
-        <div>
-          <AuthorName>{props.authorName}</AuthorName>
-          <AuthorUsername>@{props.authorUsername}</AuthorUsername>
-        </div>
+        <AuthorImage
+          src="https://lh3.googleusercontent.com/a-/ALV-UjV8waNex-VytHpyJ4-_agY-EWhvWYx3YbECLw4NaGDFuCQ=s272-p-k-rw-no"
+          width={32}
+          height={32}
+        />
+        <AuthorName>{props.authorName}</AuthorName>
+        <AuthorUsername>@{props.authorUsername}</AuthorUsername>
       </AuthorInfo>
     </CardWrapper>
   );
