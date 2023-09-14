@@ -28,7 +28,7 @@ const CardWrapper = styled.div`
   gap: 16px;
   grid-template-columns: auto 1fr 1fr;
   padding: 16px;
-  max-width: 1250px;
+  max-width: 1000px;
 `;
 
 const SongCover = styled.img`
@@ -77,7 +77,7 @@ const Rating = styled.div`
   & > * {
     flex: 1 0;
   }
-`
+`;
 
 const AverageRating = styled.div`
   font-weight: 400;
@@ -101,7 +101,7 @@ const ButtonRate = styled.button`
   margin: 8px auto;
   padding: 8px 24px;
   font-size: 16px;
-`
+`;
 
 const AvailableLinks = styled.div`
   display: flex;
@@ -114,7 +114,7 @@ const AvailableLink = styled.a`
     cursor: not-allowed;
     filter: grayscale(100%);
   }
-`
+`;
 
 const SongCard = (props: SongCardProps) => {
   const formatNumber = (number: number) => {
@@ -129,9 +129,7 @@ const SongCard = (props: SongCardProps) => {
       <SongCover src={props.songCover} alt="Song Cover" />
 
       <div>
-        <Title>
-          {props.title}
-        </Title>
+        <Title>{props.title}</Title>
         <ArtistName>{props.artistName}</ArtistName>
         <Genre>{props.genre}</Genre>
         <ReleaseYear>{props.releaseYear}</ReleaseYear>
