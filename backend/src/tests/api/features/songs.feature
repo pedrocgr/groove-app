@@ -1,3 +1,4 @@
+THEN o modal é fechado e o usuário "Ana" visualiza a mensagem "Música 'Sombras no Horizonte' foi criada com sucesso"
 Scenario: Editar uma música
 Given uma música existente na base de dados com ID "X"
 And os novos dados da música: title "Novo Nome", artist "Novo Cantor", genre "Novo Gênero", release_year "2019", popularity "10" e available_on "{}"
