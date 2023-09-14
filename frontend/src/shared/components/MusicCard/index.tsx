@@ -7,9 +7,9 @@ const MusicCard: React.FC<{
   name: string;
   image: string;
   id: string;
-  data_cy-topRated?: string;
-  data2_cy-topRated?: string;
-}> = ({ artist, name, image, id, data_cy-topRated, data2_cy-topRated }) => {
+  data_cy?: string;
+  data2_cy?: string;
+}> = ({ artist, name, image, id, data2_cy, data_cy }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -17,9 +17,9 @@ const MusicCard: React.FC<{
       <MusicImg 
       style={{ backgroundImage: `url(${image})`}} 
       onClick={() => setIsOpen(true)}
-      data-cy={data2_cy-topRated} 
+      data-cy={data2_cy} 
       />
-      <MusicName data-cy={data_cy-topRated}>{name}</MusicName>
+      <MusicName data-cy={data_cy}>{name}</MusicName>
       <MusicArtist>{artist}</MusicArtist>
       <MusicDetail isOpen={isOpen} setIsOpen={setIsOpen} id={id} />
     </MusicContainer>
