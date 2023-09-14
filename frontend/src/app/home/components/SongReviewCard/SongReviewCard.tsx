@@ -20,6 +20,7 @@ const CardWrapper = styled.div`
   row-gap: 16px;
   max-width: 600x;
   max-lenght: 1000px;
+  word-wrap: break-word;
 `;
 
 const ReviewTitle = styled.div`

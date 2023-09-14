@@ -22,6 +22,7 @@ const CardWrapper = styled.div`
   padding: 16px;
   row-gap: 16px;
   max-width: 1200px;
+  word-wrap: break-word;
 `;
 
 const SongHeader = styled.div`
