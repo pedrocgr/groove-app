@@ -45,28 +45,29 @@ const InHigh: React.FC = () => {
       // song.image_url = 'https://upload.wikimedia.org/wikipedia/pt/3/3c/Capa_de_Lover.png'
 
       aux.push(song);
-    }
-    );
-    console.log('******************************');
+    });
+    console.log("******************************");
 
     console.log(aux);
-    console.log('******************************');
+    console.log("******************************");
     setTrueMusicList(aux);
   };
   const fetchData = async () => {
     try {
-      const response = await axios.get('http://127.0.0.1:8000/songs/songs_h/highlighted', {
-      });
-      
+      const response = await axios.get(
+        "http://127.0.0.1:8000/songs/songs_h/highlighted",
+        {}
+      );
+
       const data: SearchResult[] = response.data;
-      console.log('---------------');
+      console.log("---------------");
 
       console.log(data);
-      console.log('---------------');
+      console.log("---------------");
       handleResponse(response.data);
       // setSearchResults(data);
     } catch (error) {
-      console.error('Erro ao buscar dados:', error);
+      console.error("Erro ao buscar dados:", error);
     }
   };
   const [trueMusicList, setTrueMusicList] = React.useState<SearchResult[]>([]);
@@ -83,8 +84,10 @@ const InHigh: React.FC = () => {
             name={music.title}
             image={music.image_url}
             id={music.id}
+            data_cy={music.title}
+            dataa_cy={music.image_url}
           />
-        ))} 
+        ))}
       </MusicListContainer>
     </Wallpaper>
   );
