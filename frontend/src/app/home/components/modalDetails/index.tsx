@@ -18,7 +18,7 @@ interface MusicData {
     apple_music_link: string;
   };
   created_at: string;
-  image_url: string;
+  cover: string;
   average_rating: number;
 }
 
@@ -55,7 +55,7 @@ const MusicDetail: React.FC<{
       console.log(response.data);
       console.log(response2.data);
       console.log("-----------------");
-      let data = response.data;
+      const data = response.data;
       const aux = {
         youtube_link: "",
         deezer_link: "",
@@ -81,7 +81,7 @@ const MusicDetail: React.FC<{
         }}
         title="Detalhes da música"
         textExit=""
-        textSubmit=""
+        textSubmit="Avalie esta música"
         onClick={(e) => handleSubmit(e)}
         onCancel={() => {
           setIsOpen(false);
@@ -95,7 +95,7 @@ const MusicDetail: React.FC<{
                 id={data.id}
                 title={data.title}
                 artistName={data.artist}
-                songCover={data.image_url}
+                songCover={data.cover}
                 genre={data.genre}
                 releaseYear={data.release_year}
                 averageRating={data.average_rating}

@@ -27,7 +27,7 @@ export function GlobalAlert({ title, type, close, text, confirmButton }: { title
   }, []);
 
   return (
-    <BackgroundDiv type={type}>
+    <BackgroundDiv data-cy="alert_message_modal" type={type}>
       <AlertCard color={color}>
         {title && <Title color={color}>{title}</Title>}
         {text && <Text color={color}>{text}</Text>}

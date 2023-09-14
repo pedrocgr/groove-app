@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { IconButton, Button, Chip, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
+import { Stack, IconButton, Button, Chip, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 import { TableVirtuoso, TableComponents } from 'react-virtuoso';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
+import AddIcon from '@mui/icons-material/Add';  
 
 import { Wallpaper, TableDiv, LabelDiv, Rick } from './style';
 import Typography from '@mui/material/Typography';
@@ -219,10 +220,7 @@ const ListContent: React.FC = () => {
     
     return (
         <Wallpaper>
-          <LabelDiv>
-            {/* <Chip label="LIST CONTENT" size='medium' color="default" style={{ fontSize: 15, width: '100%'}} /> */}
-          </LabelDiv>
-          {/* <Rick src={RickImage}></Rick> */}
+          <LabelDiv />
 
           {/* <TableDiv>
               <Paper style={{ height: 400, width: '100%' }}>
@@ -321,12 +319,16 @@ const ListContent: React.FC = () => {
               </Box>
               <CustomTabPanel value={value} index={0}>
                 <DataTable contentType="albums"/>
-                <MuiButton />
+                <Stack direction="row" spacing={2}>
+                  <Button variant="contained" color="secondary" startIcon={<AddIcon />}>Adicionar Album</Button>
+                </Stack>
               </CustomTabPanel>
 
               <CustomTabPanel value={value} index={1}>
                 <DataTable contentType="songs"/>
-                <MuiButton />
+                <Stack direction="row" spacing={2}>
+                  <Button variant="contained" color="secondary" startIcon={<AddIcon />}>Adicionar Música</Button>
+                </Stack>
               </CustomTabPanel>
             </Box>
           </TableDiv>

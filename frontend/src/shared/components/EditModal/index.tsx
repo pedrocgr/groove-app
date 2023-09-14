@@ -6,7 +6,9 @@ import {
   DialogActions,
   Button,
   TextField,
+  Grid,
 } from '@mui/material';
+import Swal from 'sweetalert2'
 import axios from 'axios';
 
 interface EditModalProps {
@@ -17,6 +19,7 @@ interface EditModalProps {
 }
 
 const EditModal: React.FC<EditModalProps> = ({ open, onClose, isEditingAlbum, itemId}) => {
+
 
   useEffect(() => {
     if (open && itemId) {
@@ -48,7 +51,13 @@ const EditModal: React.FC<EditModalProps> = ({ open, onClose, isEditingAlbum, it
     artist: '',
     genre: '',
     release_year: '',
-    image_url: '',
+    cover: '',
+    available_on: {
+      'youtube_link': '',
+      'deezer_link': '',
+      'spotify_link': '',
+      'apple_music_link': '',
+    },
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -74,15 +83,45 @@ const EditModal: React.FC<EditModalProps> = ({ open, onClose, isEditingAlbum, it
         axios.put(apiUrl, formData).then((response) => {
             console.log(response);
             console.log(response.data);
+
+            if(response.status == 200){
+              Swal.fire({
+                icon: 'success',
+                title: 'Música editada com sucesso!',
+                showConfirmButton: false,
+                timer: 1500
+              })
+            } else {
+              Swal.fire({ 
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Algo deu errado!',
+              })
+            }
         });
     } else if (isEditingAlbum) {
         apiUrl = `http://127.0.0.1:8000/albums/${itemId}`;
 
         // Fetch data from the backend using Axios (replace with your API endpoint)
         axios.put(apiUrl, formData).then((response) => {
-            console.log(response);
-            console.log(response.data);
-        });
+          console.log(response);
+          console.log(response.data);
+
+          if(response.status == 200){
+            Swal.fire({
+              icon: 'success',
+              title: 'Música editada com sucesso!',
+              showConfirmButton: false,
+              timer: 1500
+            })
+          } else {
+            Swal.fire({ 
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Algo deu errado!',
+            })
+          }
+      });
     }
 
     // After submitting, close the modal
@@ -91,44 +130,119 @@ const EditModal: React.FC<EditModalProps> = ({ open, onClose, isEditingAlbum, it
 
   return (
     <Dialog open={open} onClose={onClose}>
-      <DialogTitle>{isEditingAlbum ? 'Editar álbum' : 'Editar música'}</DialogTitle>
+      <DialogTitle align='center'>{isEditingAlbum ? 'Editar álbum' : 'Editar música'}</DialogTitle>
       <DialogContent>
         <form>
-          <TextField
-            name="title"
-            label="Nome"
-            fullWidth
-            value={formData.title}
-            onChange={handleInputChange}
-          />
-          <TextField
-            name="artist"
-            label="Artista"
-            fullWidth
-            value={formData.artist}
-            onChange={handleInputChange}
-          />
-          <TextField
-            name="genre"
-            label="Gênero"
-            fullWidth
-            value={formData.genre}
-            onChange={handleInputChange}
-          />
-          <TextField
-            name="release_year"
-            label="Ano de lançamento"
-            fullWidth
-            value={formData.release_year}
-            onChange={handleInputChange}
-          />
-          <TextField
-            name="image_url"
-            label="Link para imagem"
-            fullWidth
-            value={formData.image_url}
-            onChange={handleInputChange}
-          />
+          <Grid container spacing={2} style={{marginTop: '5px'}}>
+            <Grid item xs={6}>
+              <TextField
+                required
+                name="title"
+                label="Nome"
+                fullWidth
+                value={formData.title}
+                onChange={handleInputChange}
+                color="secondary"
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <TextField
+                required
+                name="artist"
+                label="Artista"
+                fullWidth
+                value={formData.artist}
+                onChange={handleInputChange}
+                color="secondary"
+                style={{ marginBottom: '8px' }}
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <TextField
+                required
+                name="genre"
+                label="Gênero"
+                fullWidth
+                value={formData.genre}
+                onChange={handleInputChange}
+                color="secondary"
+                style={{ marginBottom: '8px' }}
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <TextField
+                required
+                name="release_year"
+                label="Ano de lançamento"
+                fullWidth
+                value={formData.release_year}
+                onChange={handleInputChange}
+                color="secondary"
+                type="number"
+                style={{ marginBottom: '8px' }} 
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <TextField
+                required
+                name="cover"
+                label="Link para imagem"
+                fullWidth
+                value={formData.cover}
+                onChange={handleInputChange}
+                color="secondary"
+                style={{ marginBottom: '8px' }}
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <TextField
+                required
+                name="available_on.youtube_link"
+                label="Youtube link"
+                fullWidth
+                value={formData.available_on.youtube_link}
+                onChange={handleInputChange}
+                color="secondary"
+                style={{ marginBottom: '8px' }}
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <TextField
+                required
+                name="available_on.spotify_link"
+                label="Spotify link"
+                fullWidth
+                value={formData.available_on.spotify_link}
+                onChange={handleInputChange}
+                color="secondary"
+                style={{ marginBottom: '8px' }}
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <TextField
+                required
+                name="available_on.deezer_link"
+                label="Deezer link"
+                fullWidth
+                value={formData.available_on.deezer_link}
+                onChange={handleInputChange}
+                color="secondary"
+                style={{ marginBottom: '8px' }}
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <TextField
+                required
+                name="available_on.apple_music_link"
+                label="Apple Music link"
+                fullWidth
+                value={formData.available_on.apple_music_link}
+                onChange={handleInputChange}
+                color="secondary"
+                style={{ marginBottom: '8px' }}
+              />
+            </Grid>
+          </Grid>
         </form>
       </DialogContent>
       <DialogActions>

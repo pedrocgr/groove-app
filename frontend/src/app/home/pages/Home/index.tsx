@@ -14,7 +14,7 @@ interface Review {
   author: string;
   songTitle: string;
   songCover: string;
-  image_url: string;
+  cover: string;
 }
 export const TableDiv = styled.div`
   display: flex;

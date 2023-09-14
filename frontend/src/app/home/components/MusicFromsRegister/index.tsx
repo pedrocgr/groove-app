@@ -34,7 +34,7 @@ const MusicForm: React.FC<{
                 'spotify_link': linkSpotify,
                 'apple_music_link': linkApple,
             },
-            'image_url': imageLink
+            'cover': imageLink
         };
 
         console.log(formData);
@@ -46,7 +46,7 @@ const MusicForm: React.FC<{
             console.log(setOptions)
             setOptions({
                 text:
-                    'Música criada com sucesso',
+                    "Música '"+ title +"' foi criada com sucesso",
                 type: 'success',
                 open: true,
             });
@@ -84,7 +84,7 @@ const MusicForm: React.FC<{
             textExit="Cancelar"
             textSubmit="Salvar"
             onClick={(e) => handleSubmit(e)}
-
+            id="music_register"
             onCancel={() => {setIsOpen(false)}}
             isBold={false}
             disabledSubmit={false}
@@ -93,7 +93,7 @@ const MusicForm: React.FC<{
                     <div>
                         <label>Titulo:</label>
                         <RegisterInput
-
+                            data_cy="title"
                             value={title}
                             onChange={(e) => setTitle(e)}
                             required
@@ -102,7 +102,7 @@ const MusicForm: React.FC<{
                     <div>
                         <label>Gênero:</label>
                         <RegisterInput
-
+                            data_cy="genre"     
                             value={genre}
                             onChange={(e) => setGenre(e)}
                             required
@@ -111,6 +111,7 @@ const MusicForm: React.FC<{
                     <div>
                         <label>Artista:</label>
                         <RegisterInput
+                            data_cy="artist" 
                             value={artist}
                             onChange={(e) => setArtist(e)}
                             required
@@ -119,6 +120,7 @@ const MusicForm: React.FC<{
                     <div>
                         <label>Ano de lançamento:</label>
                         <RegisterInput
+                            data_cy="release_year" 
                             value={year}
                             onChange={(e) => setYear(e)}
                             required
@@ -127,6 +129,7 @@ const MusicForm: React.FC<{
                     <div>
                         <label>Link do YouTube:</label>
                         <RegisterInput
+                            data_cy="yt" 
                             value={linkYouTube}
                             onChange={(e) => setLinkYouTube(e)}
                             required
@@ -135,6 +138,7 @@ const MusicForm: React.FC<{
                     <div>
                         <label>Link do Deezer:</label>
                         <RegisterInput
+                            data_cy="ld" 
                             value={linkDeezer}
                             onChange={(e) => setLinkDeezer(e)}
                             required
@@ -143,6 +147,7 @@ const MusicForm: React.FC<{
                     <div>
                         <label>Link do Spotify:</label>
                         <RegisterInput
+                            data_cy="sp" 
                             value={linkSpotify}
                             onChange={(e) => setLinkSpotify(e)}
                             required
@@ -151,6 +156,7 @@ const MusicForm: React.FC<{
                     <div>
                         <label>Link do Apple Music:</label>
                         <RegisterInput
+                            data_cy="amp" 
                             value={linkApple}
                             onChange={(e) => setlinkApple(e)}
                             required
@@ -159,6 +165,7 @@ const MusicForm: React.FC<{
                     <div>
                         <label>Link da Imagem:</label>
                         <RegisterInput
+                            data_cy="img" 
                             value={imageLink}
                             onChange={(e) => setImageLink(e)}
                             required

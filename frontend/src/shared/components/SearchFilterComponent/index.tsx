@@ -140,19 +140,20 @@ const SearchFilterComponent: React.FC<SearchFilterProps> = ({
     <SearchMainDiv>
       <SearchFilterWrapper>
         {/* Imagem da lupa */}
-        <LupaImage src={Lupa} alt="lupa" onClick={() => fetchData()}/>
+        <LupaImage src={Lupa} alt="lupa" onClick={() => fetchData()} data-cy="SearchButton"/>
 
         {/* Input de pesquisa */}
         <SearchInput
           type="text"
           placeholder="Pesquisar"
           onChange={handleSearch}
+          data-cy="SearchInput"
         />
 
         {/* Botão de filtro */}
         <FilterButton onClick={onFilter}>
           {/* Ícone de filtro */}
-          <FilterImage onClick={handleDropdown} src={filter} alt="filter" />
+          <FilterImage onClick={handleDropdown} src={filter} alt="filter" data-cy="FilterButton" />
 
           {/* Dropdown de filtros */}
           <DropdownFilter
@@ -162,10 +163,10 @@ const SearchFilterComponent: React.FC<SearchFilterProps> = ({
               {/* Dropdown para selecionar gênero */}
               <label htmlFor="cars1">Gênero</label>
               <div style={{ marginBottom: "5px" }}></div>
-              <select name="cars1" id="cars1" onChange={handleGenreChange}>
+              <select name="cars1" id="cars1" onChange={handleGenreChange} data-cy="GenreButton">
                 {/* Opções de gênero */}
                 <option value="Nenhum">Nenhum</option>
-                <option value="Pop">Pop</option>
+                <option value="Pop" data-cy="PopButton">Pop</option>
                 <option value="MPB">MPB</option>
                 <option value="Rap">Rap</option>
                 <option value="Bossa Nova">Bossa Nova</option>
@@ -186,7 +187,7 @@ const SearchFilterComponent: React.FC<SearchFilterProps> = ({
             <div>
               {/* Dropdown para selecionar ano de lançamento */}
               <div style={{ marginBottom: "5px" }}></div>
-              <label htmlFor="cars2">Ano de Lançamento</label>
+              <label htmlFor="cars2" data-cy="SerchYear">Ano de Lançamento</label>
               <div style={{ marginBottom: "5px" }}></div>
               <input type="number" name="cars2" id="cars2" onChange={handleYearChange}/>
 
@@ -212,15 +213,16 @@ const SearchFilterComponent: React.FC<SearchFilterProps> = ({
                   key={result.id}
                   artist={result.artist}
                   name={result.title}
-                  image={result.image_url}
+                  image={result.cover}
                   id={result.id}
-                    avg_rating={result.average_rating}
+                  avg_rating={result.average_rating}
+                  data_cy={result.title}
                 />
               ))}
               </ResultItemsDiv>
           </ResultItem>
         ) : (
-            <Error />
+            <Error/>
         )}
       </Results>
 

@@ -44,6 +44,7 @@ function ModalComponent({
     onClick,
     onCancel = () => 1,
     isBold = false,
+    id= '',
     disabledSubmit = false,
 }: {
     open: boolean;
@@ -56,6 +57,7 @@ function ModalComponent({
     onCancel?: Function;
     isBold?: boolean;
     disabledSubmit?: boolean;
+    id?: string;
 }) {
     const classes = useStyles();
 
@@ -72,6 +74,7 @@ function ModalComponent({
                 BackdropProps={{
                     timeout: 500,
                 }}
+                id={id}
             >
                 <Fade in={open}>
                     <ModalContainer>
@@ -85,7 +88,8 @@ function ModalComponent({
                         </Header>
                         {children}
                         <ButtonContainer justify='flex-end' align='center'>
-                            <Button onClick={() => {
+                            <Button 
+                            onClick={() => {
                                 setOpen(false)
                                 onCancel()
                             }} color={GlobalTheme.colors.white}>
@@ -93,8 +97,9 @@ function ModalComponent({
                                     {textExit}
                                 </Pbuttons>
                             </Button>
-                            <Button onClick={() => onClick()} color='pink' disabled={disabledSubmit}>
+                            <Button data-cy="submmit" onClick={() => onClick()} color='pink' disabled={disabledSubmit}>
                                 <Pbuttons>
+                                    
                                     {textSubmit}
                                 </Pbuttons>
                             </Button>

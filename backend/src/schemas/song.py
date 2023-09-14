@@ -11,7 +11,7 @@ class SongCreate(BaseModel):
     cover: Optional[str] = None
     popularity: Optional[int] = 0
     available_on: Optional[object] = {}
-    image_url: Optional[str] = ''
+    # image_url: Optional[str] = ''
 
 
 class SongModel(BaseModel):
@@ -24,7 +24,7 @@ class SongModel(BaseModel):
     popularity: Optional[int] = 0
     available_on: Optional[object] = {}
     created_at: Optional[datetime] = None
-    image_url: Optional[str] = ''
+    # image_url: Optional[str] = ''
     average_rating: Optional[float] = 0.0
 
 
@@ -38,7 +38,7 @@ class SongGet(BaseModel):
     popularity: Optional[int] = 0
     available_on: Optional[object] = {}
     created_at: Optional[datetime] = None
-    image_url: Optional[str] = ''
+    # image_url: Optional[str] = ''
     average_rating: Optional[float] = 0.0
 
 
@@ -52,7 +52,7 @@ class SongCreateModel(BaseModel):
     popularity: Optional[int] = 0
     available_on: Optional[object] = {}
     created_at: Optional[datetime] = None
-    image_url: Optional[str] = ''
+    # image_url: Optional[str] = ''
     average_rating: Optional[float] = 0.0
 
 
